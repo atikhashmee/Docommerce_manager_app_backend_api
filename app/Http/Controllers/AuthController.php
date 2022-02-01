@@ -31,8 +31,10 @@ class AuthController extends Controller
         $this->validate($request, [
             'email' => 'required|email',
             'password' => 'required',
+            'app_id' => 'required|integer|exists:stores,id',
         ]);
         $credentials = $request->only('email', 'password');
+        $credentials['store_id'] = $request->app_id;
         $token = auth()->attempt($credentials);
         //$token = $this->guard()->attempt($credentials)
         if ($token) {

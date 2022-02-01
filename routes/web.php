@@ -38,4 +38,12 @@ Route::group([
     Route::post('logout', 'AuthController@logout');
     Route::post('refresh', 'AuthController@refresh');
     Route::post('me', 'AuthController@me');
+
+    Route::group(['prefix' => 'categories'], function ($router) {
+        Route::get('/', 'CategoryController@index');
+        Route::get('{id}', 'CategoryController@show');
+        Route::post('store', 'CategoryController@store');
+        Route::put('update/{id}', 'CategoryController@update');
+        Route::delete('delete/{id}', 'CategoryController@destroy');
+    });
 });
