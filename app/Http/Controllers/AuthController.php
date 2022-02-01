@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use App\Models\Store;
 
 class AuthController extends Controller
 {
@@ -27,13 +28,18 @@ class AuthController extends Controller
      */
     public function login(Request $request)
     {
+        $this->validate($request, [
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
         $credentials = $request->only('email', 'password');
-
-        if ($token = $this->guard()->attempt($credentials)) {
+        $token = auth()->attempt($credentials);
+        //$token = $this->guard()->attempt($credentials)
+        if ($token) {
             return $this->respondWithToken($token);
         }
 
-        return response()->json(['error' => 'Unauthorized'], 401);
+        return response()->json(['error' => 'Couldn\'t login, Invalid Credentials'], 401);
     }
 
     /**
@@ -43,7 +49,9 @@ class AuthController extends Controller
      */
     public function me()
     {
-        $user = $this->guard()->user()->with('store')->first();
+        $user = auth()->user();
+        $store = Store::where('id', $user->store_id)->first();
+        $user['store'] = $store;
         return response()->json($user);
     }
 
