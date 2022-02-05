@@ -46,4 +46,12 @@ Route::group([
         Route::put('update/{id}', 'CategoryController@update');
         Route::delete('delete/{id}', 'CategoryController@destroy');
     });
+
+    Route::group(['prefix' => 'warehouses'], function ($router) {
+        Route::get('/', 'WarehouseController@index');
+        Route::get('{id}', 'WarehouseController@show');
+        Route::post('store', 'WarehouseController@store');
+        Route::put('update/{id}', 'WarehouseController@update');
+        Route::delete('delete/{id}', 'WarehouseController@destroy');
+    });
 });
