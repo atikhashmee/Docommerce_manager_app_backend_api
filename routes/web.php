@@ -54,4 +54,19 @@ Route::group([
         Route::put('update/{id}', 'WarehouseController@update');
         Route::delete('delete/{id}', 'WarehouseController@destroy');
     });
+    Route::group(['prefix' => 'countries'], function ($router) {
+        Route::get('/', 'MainController@getCountries');
+    });
+
+    Route::group(['prefix' => 'brands'], function ($router) {
+        Route::get('/', 'WarehouseController@index');
+    });
+
+    Route::group(['prefix' => 'manufectureres'], function ($router) {
+        Route::get('/', 'ManufacturerController@index');
+    });
+
+    Route::group(['prefix' => 'suppliers'], function ($router) {
+        Route::get('/', 'WarehouseController@index');
+    });
 });
