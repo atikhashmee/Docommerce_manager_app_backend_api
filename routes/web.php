@@ -59,7 +59,7 @@ Route::group([
     });
 
     Route::group(['prefix' => 'brands'], function ($router) {
-        Route::get('/', 'WarehouseController@index');
+        Route::get('/', 'BrandController@index');
     });
 
     Route::group(['prefix' => 'manufectureres'], function ($router) {
@@ -67,6 +67,10 @@ Route::group([
     });
 
     Route::group(['prefix' => 'suppliers'], function ($router) {
-        Route::get('/', 'WarehouseController@index');
+        Route::get('/', 'SupplierController@index');
+    });
+
+    Route::group(['prefix' => 'local-shippings'], function ($router) {
+        Route::get('/', 'MainController@getLocalShipping');
     });
 });
