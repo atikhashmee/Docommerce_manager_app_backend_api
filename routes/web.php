@@ -73,4 +73,8 @@ Route::group([
     Route::group(['prefix' => 'local-shippings'], function ($router) {
         Route::get('/', 'MainController@getLocalShipping');
     });
+
+    Route::group(['prefix' => 'products'], function ($router) {
+        Route::get('/', 'ProductController@index');
+    });
 });

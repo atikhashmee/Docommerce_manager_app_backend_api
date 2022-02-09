@@ -68,16 +68,6 @@ class Product extends Model
     ];
 
     /**
-     * Get products categories.
-     *
-     * @return string
-     */
-    public function getCategoryListAttribute()
-    {
-        return $this->categories->pluck('id');
-    }
-
-    /**
      * Get products tags.
      *
      * @return string
