@@ -76,5 +76,6 @@ Route::group([
 
     Route::group(['prefix' => 'products'], function ($router) {
         Route::get('/', 'ProductController@index');
+        Route::get('/{id}', 'ProductController@show');
     });
 });
