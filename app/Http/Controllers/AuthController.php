@@ -52,7 +52,10 @@ class AuthController extends Controller
     public function me()
     {
         $user = auth()->user();
-        $store = Store::where('id', $user->store_id)->first();
+        $store = Store::select('stores.*', 'currencies.symbol as cur_symb')
+        ->where('stores.id', $user->store_id)
+        ->join('currencies', 'currencies.id', 'stores.currency_id')
+        ->first();
         $user['store'] = $store;
         return response()->json($user);
     }

@@ -11,7 +11,7 @@ class ProductController extends Controller
         $user = auth()->user();
         $data = Product::where('store_id', $user->store_id)
         ->where('status', 'active')
-        ->get();
+        ->paginate(10);
         return response()->json($data);
     }
 
